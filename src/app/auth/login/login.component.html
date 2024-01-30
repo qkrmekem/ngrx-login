@@ -1,0 +1,9 @@
+<mat-form-field>
+    <mat-label>id</mat-label>
+    <input matInput [formControl]="id">
+</mat-form-field>
+<mat-form-field>
+    <mat-label>password</mat-label>
+    <input matInput [formControl]="password">
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="login()">로그인</button>

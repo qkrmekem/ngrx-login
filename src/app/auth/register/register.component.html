@@ -1,1 +1,26 @@
-<p>register works!</p>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+        <mat-label>아이디</mat-label>
+        <input matInput formControlName="id" placeholder="이메일을 입력하세요">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>비밀번호</mat-label>
+        <input matInput formControlName="password" placeholder="비밀번호를 입력하세요" type="password">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>이름</mat-label>
+        <input matInput formControlName="name" placeholder="이메일을 입력하세요">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>이메일</mat-label>
+        <input matInput formControlName="email" placeholder="이메일을 입력하세요">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">회원가입</button>
+</form>
+
+<div>{{accessToken}}</div>
+<div>{{error}}</div>

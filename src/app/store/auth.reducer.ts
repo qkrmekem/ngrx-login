@@ -10,13 +10,14 @@ export const initialState: State = {
 
 export const authReducer = createReducer(
     initialState,
-    on(AuthActions.loginSuccess, (state, { accessToken }) => {
-        console.log('로그인 success 호출');
-        
+    // 로그인
+    on(AuthActions.loginSuccess, (state:State, { accessToken }) => {
         return { ...state, accessToken }
-    })
-    // on(AuthActions.loginFailure, (state, { error }) => ({ ...state, error })),
-    // on(AuthActions.signupSuccess, (state, { accessToken }) => ({ ...state, accessToken })),
-    // on(AuthActions.signupFailure, (state, { error }) => ({ ...state, error })),
-    // on(AuthActions.storeUserData, (state, { user }) => ({ ...state, user })),
+    }),
+    on(AuthActions.loginFailure, (state: State, { error }) => ({ ...state, error })),
+    // 회원가입
+    on(AuthActions.signupSuccess, (state: State, { accessToken }) => ({ ...state, accessToken })),
+    on(AuthActions.signupFailure, (state: State, { error }) => ({ ...state, error })),
+    // 회원정보 저장
+    on(AuthActions.storeUserData, (state: State, { user }) => ({ ...state, user })),
 )

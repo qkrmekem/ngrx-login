@@ -14,16 +14,16 @@ export class AuthEffects {
             mergeMap((action) =>
                 this.authService.login({ id: action.id, password: action.password}).pipe(
                     tap((result) => {
-                        console.log('탭호출');
+                        console.log('AuthEffects탭호출', result.result);
                         const user = this.jwtHelper.decodeToken(result.result);
                         this.store.dispatch(AuthActions.storeUserData({ user }));
                     }),
                     map((result) => {
-                        console.log('맵호출');
+                        console.log('AuthEffects맵호출');
                         return AuthActions.loginSuccess({ accessToken: result.result });
                     }),
                     catchError(( error ) => {
-                        console.log('에러 호출', error);
+                        console.log('AuthEffects에러 호출', error);
                         
                         return of(AuthActions.loginFailure({ error }))
                     }
@@ -38,13 +38,14 @@ export class AuthEffects {
             ofType(AuthActions.signUp),
             mergeMap((action) => 
                 this.authService.register(action.user).pipe(
-                    tap((accessToken) => {
-                        const user = this.jwtHelper.decodeToken(accessToken);
+                    tap((result) => {
+                        console.log('AuthEffects탭호출', result.result);
+                        const user = this.jwtHelper.decodeToken(result.result);
                         this.store.dispatch(AuthActions.storeUserData({ user }));
                     }),
-                    map((accessToken) => {
-                        const user = this.jwtHelper.decodeToken(accessToken);
-                        return AuthActions.signupSuccess({accessToken})
+                    map((result) => {
+                        const user = this.jwtHelper.decodeToken(result.result);
+                        return AuthActions.signupSuccess({ accessToken: result.result})
                     }),
                     catchError((error) => of(AuthActions.signupFailure({ error })))
                 )

@@ -6,7 +6,7 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class AuthService {
-  baseUrl: string = 'http://localhost:3000/auth/login'
+  baseUrl: string = 'http://localhost:3000/member'
 
   constructor(
     private http: HttpClient
@@ -15,10 +15,12 @@ export class AuthService {
   login( param: {id: string, password: string} ){
     console.log('로그인 서비스 호출');
 
-    return this.http.post<{result: string}>(this.baseUrl, param );
+    return this.http.post<{result: string}>(this.baseUrl+'/login', param );
   }
 
   register( user: User ){
-    return this.http.post<string>( this.baseUrl, user );
+    console.log('회원가입 서비스 호출');
+    
+    return this.http.post<{result: string}>( this.baseUrl+'/signup', user );
   }
 }

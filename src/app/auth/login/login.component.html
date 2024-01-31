@@ -7,3 +7,6 @@
     <input matInput [formControl]="password">
 </mat-form-field>
 <button mat-raised-button color="primary" (click)="login()">로그인</button>
+
+<div>엑세스 토큰 : {{ accessToken }}</div>
+<div>에러 : {{ error }}</div>
